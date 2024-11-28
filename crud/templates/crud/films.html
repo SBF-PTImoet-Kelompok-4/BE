@@ -1,0 +1,19 @@
+{% if user.is_staff %}
+    <a href="{% url 'crud:add-film' %}">Tambah Film</a>
+{% endif %}
+
+<ul>
+    {% for film in films %}
+    <li>
+        <strong>{{ film.title }}</strong> ({{ film.release_year }}) - {{ film.genre }}
+        <p>{{ film.description }}</p>
+        {% if user.is_staff %}
+            <a href="{% url 'crud:edit-film' film.id %}">Edit</a>
+            <form method="POST" action="{% url 'crud:delete-film' film.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Hapus</button>
+            </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>

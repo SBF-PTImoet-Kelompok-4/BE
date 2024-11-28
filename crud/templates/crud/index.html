@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filem</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="main-header">
+            <a href="{% url 'crud:index' %}" class="nothing">
+                <h3 class="info-header">Filem</h3>
+                <img src="{% static 'assets/logo(stc).png' %}" alt="logo" class="icon-header">
+            </a>
+
+            <nav>
+                <div class="center">
+                    <input id="search" type="text" class="search center" placeholder="Search a Movie..">
+                </div>
+                <a href="{% url 'crud:index' %}">Home</a>
+                <a href="{% url 'accounts:login' %}">Login</a>
+            </nav>
+            <div class="divisor"></div>
+        </div>
+    </header>
+    
+    <main>
+        <section>
+            <div class="jumbotron">
+                <h1 class="jumbotron-title">Filem - Your Only Leisure Time Killer</h1>
+                <h2 class="jumbotron-text">What movie do you want to watch today?</h2>
+                <p class="mini">Keep scrolling to find our recommendations.</p>
+            </div>
+        </section>
+
+        <div class="main-content">
+            <div class="content">
+                <article class="popular">
+                    <h3 class="article-title">All Movies</h3>
+                    <div class="container">
+                        {% for film in films %}
+                        <div class="box">
+                            <img src="{% static film.image_url %}" alt="movie cover" class="box-img">
+                            <h4 class="box-title">{{ film.title }}</h4>
+                            <p class="box-description">{{ film.description }}</p>
+                            <div class="center">
+                                <a href="{% url 'crud:edit-film' film.id %}" class="play">Edit</a>
+                                <form method="POST" action="{% url 'crud:delete-film' film.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+    
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>

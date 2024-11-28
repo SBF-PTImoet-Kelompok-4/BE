@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Penghapusan</title>
+</head>
+<body>
+    <h1>Konfirmasi Penghapusan</h1>
+    <p>Apakah Anda yakin ingin menghapus film ini?</p>
+    <p><strong>{{ film.title }}</strong></p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Ya, Hapus</button>
+        <a href="{% url 'crud:index' %}">Batal</a>
+    </form>
+</body>
+</html>

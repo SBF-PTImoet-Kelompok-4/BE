@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filem - Register</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="main-header">
+            <a href="{% url 'crud:index' %}" class="nothing">
+                <h3 class="info-header">Filem</h3>
+                <img src="{% static 'assets/logo(stc).png' %}" alt="logo" class="icon-header">
+            </a>
+
+            <nav>
+                <div class="center">
+                    <input id="search" type="text" class="search center" placeholder="Search a Movie..">
+                </div>
+                <a href="{% url 'crud:index' %}">Home</a>
+                <a href="{% url 'accounts:login' %}">Login</a>
+            </nav>
+            <div class="divisor"></div>
+        </div>
+    </header>
+    
+    <main>
+        <section>
+            <br>
+            <h2 class="jumbotron-text">Sign up to Filem</h2>
+            <div class="center">
+                <div class="login">
+                    <h2>Register Form</h2>
+
+                    <form action="{% url 'accounts:register' %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Register</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>
